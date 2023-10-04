@@ -19,8 +19,12 @@ const Home: NextPage = () => {
 
   return (
     <main>
-      <h1>Hello world</h1>
-      <ConnectWallet />
+      <h1 className="text-3xl font-bold underline bg-red-500">Hello world</h1>
+      <ConnectWallet
+        theme={"dark"}
+        switchToActiveChain={true}
+        modalSize={"wide"}
+      />
       {nfts?.map((nft) => (
         <div key={nft.metadata.id.toString()}>{nft.metadata.name}</div>
       ))}

@@ -1,7 +1,8 @@
 "use client";
 
+import "@/styles/globals.css";
 import { Inter } from "next/font/google";
-import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { ThirdwebProvider, metamaskWallet } from "@thirdweb-dev/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
         <ThirdwebProvider
           clientId={process.env.NEXT_PUBLIC_CLIENT_ID}
           activeChain={activeChain}
+          supportedWallets={[metamaskWallet()]}
         >
           {children}
         </ThirdwebProvider>
