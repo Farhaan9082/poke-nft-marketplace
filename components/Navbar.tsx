@@ -16,7 +16,7 @@ export const Navbar = () => {
           <h1 className="text-2xl font-semibold tracking-tight">
             PokéNFT Marketplace
           </h1>
-          <div>
+          <div className="flex items-center gap-4">
             <ThemeToggle />
             <ConnectWallet
               theme={themeValue}
