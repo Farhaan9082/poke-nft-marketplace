@@ -1,5 +1,6 @@
 "use client";
 
+import { CustomWeb3Button } from "@/components/CustomWeb3Button";
 import {
   Card,
   CardContent,
@@ -10,7 +11,6 @@ import {
 } from "@/components/ui/card";
 import { CONTRACT_ADDRESS } from "@/constants";
 import { generatePokemonId } from "@/lib/utils";
-import { Web3Button } from "@thirdweb-dev/react";
 import { NextPage } from "next";
 
 const Home: NextPage = () => {
@@ -60,12 +60,7 @@ const Home: NextPage = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Web3Button
-              contractAddress={CONTRACT_ADDRESS}
-              action={(contract) => contract.erc1155.claim(0, 1)}
-            >
-              Hatch a pokemon
-            </Web3Button>
+            <CustomWeb3Button>Hatch a pokemon</CustomWeb3Button>
           </CardFooter>
         </Card>
       </div>
