@@ -1,6 +1,5 @@
 "use client";
 
-import { CustomWeb3Button } from "@/components/CustomWeb3Button";
 import {
   Card,
   CardContent,
@@ -9,11 +8,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ButtonWrapper } from "@/components/ButtonWrapper";
 import { CONTRACT_ADDRESS } from "@/constants";
 import { generatePokemonId } from "@/lib/utils";
+import { Web3Button } from "@thirdweb-dev/react";
+import { useTheme } from "next-themes";
 import { NextPage } from "next";
 
 const Home: NextPage = () => {
+  const { theme } = useTheme();
+  const themeValue = theme === "light" ? "light" : "dark";
+
   return (
     <section className="w-full bg-[url('/pokemon-background.jpg')] bg-cover bg-no-repeat bg-top rounded-lg border">
       <div className="bg-background/50 h-full flex items-center justify-center">
@@ -60,7 +65,16 @@ const Home: NextPage = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <CustomWeb3Button>Hatch a pokemon</CustomWeb3Button>
+            <ButtonWrapper>
+              <Web3Button
+                contractAddress={CONTRACT_ADDRESS}
+                action={(contract) => contract.erc1155.claim(0, 1)}
+                theme={themeValue}
+                className="!w-full"
+              >
+                Hatch a pokemon
+              </Web3Button>
+            </ButtonWrapper>
           </CardFooter>
         </Card>
       </div>
