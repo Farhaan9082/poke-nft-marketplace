@@ -20,64 +20,66 @@ const Home: NextPage = () => {
   const themeValue = theme === "light" ? "light" : "dark";
 
   return (
-    <section className="w-full bg-[url('/pokemon-background.jpg')] bg-cover bg-no-repeat bg-top rounded-lg border">
-      <div className="bg-background/50 h-full flex items-center justify-center">
-        <Card>
-          <CardHeader className="pb-3 border-b">
-            <CardTitle>Hatch Probability</CardTitle>
-            <CardDescription>All gen 1 pokémons available</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2 pt-4">
-            <div className="flex justify-between text-muted-foreground text-sm">
-              <div className="flex items-center gap-1">
-                <div className="h-3 w-3 bg-[#808080] rounded-sm"></div>
-                <p>Common</p>
-              </div>
-              <p>49%</p>
+    <section className="flex-1 flex items-center justify-center dark:bg-[url('/pokemon-background.jpg')] bg-[url('/pokemon-background-light.jpg')] bg-cover bg-top bg-no-repeat">
+      <Card>
+        <CardHeader className="pb-3 border-b">
+          <CardTitle>Hatch Probability</CardTitle>
+          <CardDescription>All gen 1 pokémons available</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-2 pt-4">
+          <div className="flex justify-between text-muted-foreground text-sm">
+            <div className="flex items-center gap-1">
+              <div className="h-3 w-3 bg-[#808080] rounded-sm"></div>
+              <p>Common</p>
             </div>
-            <div className="flex justify-between text-muted-foreground text-sm">
-              <div className="flex items-center gap-1">
-                <div className="h-3 w-3 bg-[#2ecc71] rounded-sm"></div>
-                <p>Uncommon</p>
-              </div>
-              <p>25%</p>
+            <p>49%</p>
+          </div>
+          <div className="flex justify-between text-muted-foreground text-sm">
+            <div className="flex items-center gap-1">
+              <div className="h-3 w-3 bg-[#2ecc71] rounded-sm"></div>
+              <p>Uncommon</p>
             </div>
-            <div className="flex justify-between text-muted-foreground text-sm">
-              <div className="flex items-center gap-1">
-                <div className="h-3 w-3 bg-[#3498db] rounded-sm"></div>
-                <p>Rare</p>
-              </div>
-              <p>15%</p>
+            <p>25%</p>
+          </div>
+          <div className="flex justify-between text-muted-foreground text-sm">
+            <div className="flex items-center gap-1">
+              <div className="h-3 w-3 bg-[#3498db] rounded-sm"></div>
+              <p>Rare</p>
             </div>
-            <div className="flex justify-between text-muted-foreground text-sm">
-              <div className="flex items-center gap-1">
-                <div className="h-3 w-3 bg-[#9b59b6] rounded-sm"></div>
-                <p>Epic</p>
-              </div>
-              <p>10%</p>
+            <p>15%</p>
+          </div>
+          <div className="flex justify-between text-muted-foreground text-sm">
+            <div className="flex items-center gap-1">
+              <div className="h-3 w-3 bg-[#9b59b6] rounded-sm"></div>
+              <p>Epic</p>
             </div>
-            <div className="flex justify-between text-muted-foreground text-sm">
-              <div className="flex items-center gap-1">
-                <div className="h-3 w-3 bg-[#e67e22] rounded-sm"></div>
-                <p>Legendary</p>
-              </div>
-              <p>1%</p>
+            <p>10%</p>
+          </div>
+          <div className="flex justify-between text-muted-foreground text-sm">
+            <div className="flex items-center gap-1">
+              <div className="h-3 w-3 bg-[#e67e22] rounded-sm"></div>
+              <p>Legendary</p>
             </div>
-          </CardContent>
-          <CardFooter>
-            <ButtonWrapper>
-              <Web3Button
-                contractAddress={CONTRACT_ADDRESS}
-                action={(contract) => contract.erc1155.claim(0, 1)}
-                theme={themeValue}
-                className="!w-full"
-              >
-                Hatch a pokemon
-              </Web3Button>
-            </ButtonWrapper>
-          </CardFooter>
-        </Card>
-      </div>
+            <p>1%</p>
+          </div>
+        </CardContent>
+        <CardFooter>
+          <ButtonWrapper>
+            <Web3Button
+              contractAddress={CONTRACT_ADDRESS}
+              action={(contract) => {
+                const pokemonId = generatePokemonId();
+                contract.erc1155.claim(pokemonId, 1);
+              }}
+              onError={() => alert("Failed to hatch a pokemon")}
+              theme={themeValue}
+              className="!w-full"
+            >
+              Hatch a pokemon
+            </Web3Button>
+          </ButtonWrapper>
+        </CardFooter>
+      </Card>
     </section>
   );
 };

@@ -8,12 +8,8 @@ export const sidebarLinks = [
     label: "Collection",
   },
   {
-    route: "/buy",
-    label: "Buy",
-  },
-  {
-    route: "/sell",
-    label: "Sell",
+    route: "/marketplace",
+    label: "Marketplace",
   },
 ];
 

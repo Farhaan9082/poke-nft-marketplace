@@ -1,12 +1,10 @@
-import "@/styles/globals.css";
-import { Inter } from "next/font/google";
-import type { Metadata } from "next";
-import { ThirdwebWrapper } from "@/components/ThirdwebWrapper";
-import { ThemeWrapper } from "@/components/ThemeWrapper";
-import { PropsWithChildren } from "react";
 import { Navbar } from "@/components/Navbar";
-import { Sidebar } from "@/components/Sidebar";
-import { Bottombar } from "@/components/Bottombar";
+import { ThemeWrapper } from "@/components/ThemeWrapper";
+import { ThirdwebWrapper } from "@/components/ThirdwebWrapper";
+import "@/styles/globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { PropsWithChildren } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +17,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body
-        className={`${inter.className} container py-6 flex flex-col min-h-screen gap-4`}
+        className={`${inter.className} antialiased min-h-screen flex flex-col`}
       >
         <ThemeWrapper
           attribute="class"
@@ -31,13 +29,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
             <header>
               <Navbar />
             </header>
-            <main className="flex flex-1 gap-4">
-              <Sidebar />
-              {children}
-            </main>
-            <footer>
-              <Bottombar />
-            </footer>
+            <main className="flex flex-col flex-1">{children}</main>
           </ThirdwebWrapper>
         </ThemeWrapper>
       </body>
